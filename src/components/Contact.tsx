@@ -27,10 +27,10 @@ export default function Contact() {
 
     emailjs
       .send(
-        "service_qudq4n4", // ✅ Your Service ID
+        "service_4nmeqff", // ✅ Your Service ID
         "template_ek51r1b", // ✅ Your Template ID
         templateParams,
-        "sXjPdWU62aLpt_Wd-" // ✅ Your Public Key
+        "hm7Jbcjm1UQaqmQf-" // ✅ Your Public Key
       )
       .then(() => {
         setIsSubmitting(false);
