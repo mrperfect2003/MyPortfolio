@@ -139,7 +139,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-8 bg-background">
+    <section id="skills" className="py-12 bg-background">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -199,7 +199,7 @@ export default function Skills() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="max-h-[400px] overflow-hidden"
+            className="px-4"
           >
             {skillsData.map((category, catIndex) => {
               const categoryId = category.name === "Development & Programming" ? "development" :
@@ -215,7 +215,7 @@ export default function Skills() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
-                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8"
                 >
                   {category.skills.map((skill, index) => {
                     const levelBadge = getLevelBadge(skill.level);
@@ -227,12 +227,13 @@ export default function Skills() {
                         className="group"
                       >
                         <div className="
-                          h-32 bg-gradient-to-br from-card/80 to-card/60 
+                          min-h-[140px] w-full bg-gradient-to-br from-card/80 to-card/60 
                           backdrop-blur-xl border border-border/50 rounded-xl 
                           p-4 flex flex-col items-center justify-center text-center
                           hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10
                           transition-all duration-300 cursor-pointer
                           hover:scale-105 hover:-translate-y-1
+                          mx-2 my-2
                         ">
                           {/* Icon */}
                           <motion.div 

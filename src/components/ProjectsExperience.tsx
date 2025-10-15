@@ -10,37 +10,38 @@ import { FolderOpen, Briefcase, CalendarIcon } from "lucide-react";
 // Experience data
 const experienceData = [
   {
-    title: "Full Stack Developer",
+    title: "Associate Full Stack Engineer",
     company: "QuantiqueMinds Pvt. Ltd.",
-    period: "October 2025 - Present",
+    period: "September 2025 - Present",
     description: [
-      "Developing scalable web applications using Next.js for frontend and Golang for backend",
-      "Building RESTful APIs and implementing server-side rendering for optimal performance",
-      "Optimizing database queries with MongoDB and implementing efficient data structures",
-      "Deploying containerized applications using Docker and managing microservices architecture",
-      "Implementing authentication mechanisms and ensuring secure data handling"
+      "Architecting and developing enterprise-grade HRMS applications using Go (Golang) with Fiber framework and Next.js with React",
+      "Designing and implementing secure RESTful APIs with JWT authentication and role-based access control (RBAC) for multiple user hierarchies",
+      "Building comprehensive HR modules including Employee Management, Attendance Tracking, Leave Management, and Payroll Processing",
+      "Optimizing MongoDB operations with advanced aggregation pipelines and indexing strategies, improving query performance by 40%",
+      "Deploying containerized applications using Docker and managing cloud infrastructure on AWS EC2, ensuring 99.9% uptime"
     ],
   },
   {
-    title: "Full Stack Developer",
-    company: "Kenshi Labs",
-    period: "June 2024 - September 2024",
+    title: "Associate Backend Engineer",
+    company: "Kenshi Labs Consultancy Pvt. Ltd.",
+    period: "November 2024 - August 2025",
     description: [
-      "Developed and maintained web applications using modern JavaScript frameworks",
-      "Collaborated with cross-functional teams to deliver high-quality software solutions",
-      "Implemented responsive designs and optimized application performance",
-      "Participated in code reviews and maintained high coding standards"
+      "Engineered full-stack solutions using Go (Golang) with Fiber framework for high-performance backend services and Next.js for dynamic frontend",
+      "Developed and deployed HRMS platform featuring Payroll & Compensation Management and Reports & Analytics with real-time data processing",
+      "Integrated Razorpay Payment Gateway with secure transaction handling and webhook management for automated payment reconciliation",
+      "Built scalable buyer-seller marketplace APIs with advanced filtering, search functionality, and pagination, supporting 10,000+ concurrent users",
+      "Implemented robust authentication systems with JWT tokens and email OTP verification, reducing unauthorized access attempts by 95%"
     ],
   },
   {
-    title: "Software Development Intern",
-    company: "Roman Technologies",
-    period: "January 2024 - May 2024",
+    title: "Web Development Intern",
+    company: "Briefiy Media Pvt. Ltd.",
+    period: "October 2023 - November 2023",
     description: [
-      "Gained hands-on experience in software development lifecycle and best practices",
-      "Worked on various programming languages including JavaScript, Python, and Java",
-      "Assisted in debugging and testing applications to ensure quality and reliability",
-      "Learned about database management and API integration techniques"
+      "Completed intensive front-end development internship focused on creating responsive, user-friendly websites using HTML5 and CSS3",
+      "Collaborated with cross-functional teams including senior developers and designers to implement pixel-perfect UI components",
+      "Optimized website performance and accessibility, achieving 95+ scores on Lighthouse audits",
+      "Recognized for exceptional attention to detail, high-quality code delivery, and ability to meet tight deadlines"
     ],
   }
 ];
