@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,7 @@ type Project = {
   description: string;
   image: StaticImageData;
   link?: string;
+  githubLink?: string;
   features: string[];
   tags: string[];
   icon: React.ReactNode;
@@ -44,6 +45,7 @@ const projectsData: Project[] = [
     description: "Designed and developed a personal portfolio website using Next.js, Tailwind CSS, and Framer Motion, showcasing my skills, projects, and contact information.",
     image: Portfolio,
     link: "https://keshav-raj.web.app/",
+    githubLink: "https://github.com/mrperfect2003",
     features: [
       "Implemented responsive design for mobile and desktop views",
       "Utilized Framer Motion for animations and transitions",
@@ -98,6 +100,63 @@ const itemVariant = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
+// 3D Tilt Component
+const TiltCard = ({ children, index }: { children: React.ReactNode; index: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["17.5deg", "-17.5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    
+    const rect = ref.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateY,
+        rotateX,
+        transformStyle: "preserve-3d",
+      }}
+      className="h-full w-full"
+    >
+      <div
+        style={{
+          transform: "translateZ(75px)",
+          transformStyle: "preserve-3d",
+        }}
+        className="h-full w-full"
+      >
+        {children}
+      </div>
+    </motion.div>
+  );
+};
+
 export default function Projects() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -133,17 +192,20 @@ export default function Projects() {
               variants={itemVariant}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className="relative group"
+              className="relative group perspective-1000"
             >
-              <Card className="h-full overflow-hidden border-border/40 bg-card/60 backdrop-blur-sm hover:border-primary/30 transition-all duration-300">
+              <TiltCard index={index}>
+                <Card className="h-full overflow-hidden border-gradient-to-r from-primary/20 via-purple-500/20 to-blue-500/20 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl hover:border-primary/50 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-primary/10 relative">
                 <div className="relative aspect-video overflow-hidden">
                   <Image
                     src={project.image}
-                    alt={project.title}
+                    alt={`${project.title} - Web development project showcasing ${project.tags.join(', ')}`}
                     fill
                     className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  {/* Animated Border */}
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-3 backdrop-blur-sm">
                     {project.link && (
                       <Button asChild variant="default" size="sm" className="gap-2">
                         <a href={project.link} target="_blank" rel="noopener noreferrer">
@@ -152,9 +214,17 @@ export default function Projects() {
                         </a>
                       </Button>
                     )}
+                    {project.githubLink && (
+                      <Button asChild variant="secondary" size="sm" className="gap-2">
+                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                          <Github className="w-4 h-4" />
+                          GitHub
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </div>
-                <CardContent className="p-6">
+                <CardContent className="p-6 relative z-10">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="p-2 rounded-full bg-muted text-primary">
                       {project.icon}
@@ -177,14 +247,15 @@ export default function Projects() {
                     ))}
                   </div>
                 </CardContent>
-                <CardFooter className="px-6 pb-6 pt-0 flex flex-wrap gap-2">
+                <CardFooter className="px-6 pb-6 pt-0 flex flex-wrap gap-2 relative z-10">
                   {project.tags.map((tag, idx) => (
                     <Badge key={idx} variant="secondary" className="text-xs font-medium">
                       {tag}
                     </Badge>
                   ))}
                 </CardFooter>
-              </Card>
+                </Card>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

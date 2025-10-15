@@ -3,6 +3,8 @@ const nextConfig = {
   output: 'export',
   distDir: 'out',
   images: {
+    // For static exports, we need unoptimized: true
+    // To enable optimization, deploy with a server (Vercel, etc.)
     unoptimized: true,
     remotePatterns: [
       {

@@ -14,12 +14,21 @@ type ExperienceItem = {
 
 const experienceData: ExperienceItem[] = [
   {
-    title: "Backend Developer",
-    company: "Kenshi Labs  Consultancy Pvt. Ltd",
-    period: "2025",
+    title: "Full Stack Developer",
+    company: "QuantiqueMinds Pvt. Ltd.",
+    period: "October 2025 - Present",
     description: [
-      "Completed a three-month backe-end development internship at Kenshi Labs in 2024",
-      "As a Backend Engineer at Kenshi Labs, I worked on building scalable and efficient backend systems using Golang and MongoDB. I contributed to designing and implementing RESTful APIs, optimizing database queries, and integrating authentication mechanisms like Keycloak for secure access management. My role also involved working with Docker for containerized deployments and leveraging middleware in Golang to enhance application performance. Additionally, I gained hands-on experience in microservices architecture, improving system modularity and scalability. Through this experience, I strengthened my problem-solving skills and deepened my expertise in backend development."
+      "Developing scalable web applications using Next.js for frontend and Golang for backend. Building RESTful APIs, implementing server-side rendering, optimizing database queries with MongoDB, and deploying containerized applications using Docker.",
+      "Working on microservices architecture and implementing authentication mechanisms. Leveraging Next.js features including App Router, Server Components, and API routes to create high-performance, SEO-optimized applications while maintaining robust backend services with Golang."
+    ]
+  },
+  {
+    title: "Full Stack Developer",
+    company: "Kenshi Labs Consultancy Pvt. Ltd",
+    period: "2024",
+    description: [
+      "Completed a three-month full-stack development internship at Kenshi Labs in 2024",
+      "As a Full Stack Developer at Kenshi Labs, I worked on building scalable and efficient backend systems using Golang and MongoDB. I contributed to designing and implementing RESTful APIs, optimizing database queries, and integrating authentication mechanisms like Keycloak for secure access management. My role also involved working with Docker for containerized deployments and leveraging middleware in Golang to enhance application performance. Additionally, I gained hands-on experience in microservices architecture, improving system modularity and scalability. Through this experience, I strengthened my problem-solving skills and deepened my expertise in full-stack development."
     ]
   },
   {
@@ -27,7 +36,7 @@ const experienceData: ExperienceItem[] = [
     "company": "Roman Technologies",
     "period": "2024",
     "description": [
-      "Completed a three-month software development internship at Roman Technologies in 2025.",
+      "Completed a three-month software development internship at Roman Technologies in 2024.",
       "As a Software Development Intern, I gained hands-on experience in software engineering principles and programming languages such as Golang, Python, Java, and C++. I worked on developing scalable applications, writing clean and efficient code, and understanding the fundamentals of backend and frontend development.",
       "During my internship, I collaborated on projects involving RESTful API development, database management, and debugging applications to enhance performance. I also explored software development best practices, improving my problem-solving skills and deepening my understanding of full-stack development."
     ]
@@ -94,8 +103,16 @@ export default function Experience() {
           viewport={{ once: true }}
           className="relative max-w-4xl mx-auto"
         >
-          {/* Timeline line */}
-          <div className="absolute left-0 md:left-1/2 h-full w-0.5 bg-border transform md:-translate-x-1/2" />
+          {/* Animated Timeline line */}
+          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2">
+            <motion.div
+              className="w-0.5 bg-gradient-to-b from-primary via-purple-500 to-blue-500 rounded-full"
+              initial={{ height: 0 }}
+              whileInView={{ height: "100%" }}
+              viewport={{ once: true }}
+              transition={{ duration: 2, ease: "easeInOut" }}
+            />
+          </div>
 
           {experienceData.map((experience, index) => (
             <motion.div
@@ -105,38 +122,81 @@ export default function Experience() {
                 index % 2 === 0 ? "md:flex-row-reverse" : ""
               }`}
             >
-              {/* Timeline dot */}
-              <div className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary transform -translate-x-1.5 md:-translate-x-2 mt-1.5" />
+              {/* Animated Timeline dot */}
+              <motion.div 
+                className="absolute left-2.5 md:left-1/2 transform md:-translate-x-2 mt-1.5"
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 + 0.5, duration: 0.5 }}
+              >
+                <div className="w-4 h-4 rounded-full bg-gradient-to-br from-primary to-purple-500 shadow-lg shadow-primary/50 relative">
+                  <motion.div
+                    className="absolute inset-0 rounded-full bg-primary/30"
+                    animate={{
+                      scale: [1, 1.5, 1],
+                      opacity: [0.5, 0, 0.5],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                </div>
+              </motion.div>
 
               {/* Content */}
-              <div className={`md:w-1/2 ${index % 2 === 0 ? "md:text-left md:pr-12" : "md:pl-12"}`}>
-                <Card className="overflow-hidden border-border/40 bg-card/60 backdrop-blur-sm hover:border-primary/30 transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col gap-2">
-                      <div className={`flex items-center gap-2 mb-1 ${index % 2 === 0 ? "md:justify-center" : ""}`}>
-                        <BriefcaseIcon className="w-4 h-4 text-primary" />
-                        <h3 className="text-xl font-semibold">{experience.title}</h3>
-                      </div>
+              <div className={`pl-12 md:pl-0 md:w-1/2 ${index % 2 === 0 ? "md:text-left md:pr-12" : "md:pl-12"}`}>
+                <motion.div
+                  whileHover={{ 
+                    scale: 1.02, 
+                    y: -5,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="h-full"
+                >
+                  <Card className="h-full overflow-hidden border-gradient-to-r from-primary/20 via-purple-500/20 to-blue-500/20 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl hover:border-primary/50 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-primary/10 relative group">
+                    {/* Glow effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
+                    <CardContent className="p-6 relative z-10">
+                      <div className="flex flex-col gap-2">
+                        <div className={`flex items-center gap-2 mb-1 ${index % 2 === 0 ? "md:justify-center" : ""}`}>
+                          <div className="p-2 rounded-full bg-gradient-to-br from-primary/20 to-purple-500/20">
+                            <BriefcaseIcon className="w-4 h-4 text-primary" />
+                          </div>
+                          <h3 className="text-xl font-semibold bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">{experience.title}</h3>
+                        </div>
 
-                      <div className={`flex items-center gap-2 mb-3 ${index % 2 === 0 ? "md:justify-center" : ""}`}>
-                        <p className="text-foreground/80 font-medium">{experience.company}</p>
-                      </div>
+                        <div className={`flex items-center gap-2 mb-3 ${index % 2 === 0 ? "md:justify-center" : ""}`}>
+                          <p className="text-foreground/80 font-medium">{experience.company}</p>
+                        </div>
 
-                      <div className={`flex items-center gap-2 mb-4 text-sm text-muted-foreground ${index % 2 === 0 ? "md:justify-end" : ""}`}>
-                        <CalendarIcon className="w-3.5 h-3.5" />
-                        <span>{experience.period}</span>
-                      </div>
+                        <div className={`flex items-center gap-2 mb-4 text-sm text-muted-foreground ${index % 2 === 0 ? "md:justify-end" : ""}`}>
+                          <div className="p-1 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20">
+                            <CalendarIcon className="w-3.5 h-3.5 text-blue-400" />
+                          </div>
+                          <span className="font-medium">{experience.period}</span>
+                        </div>
 
-                      <div className="space-y-3">
-                        {experience.description.map((paragraph, i) => (
-                          <p key={i} className="text-sm text-foreground/80">
-                            {paragraph}
-                          </p>
-                        ))}
+                        <div className="space-y-3">
+                          {experience.description.map((paragraph, i) => (
+                            <motion.p 
+                              key={i} 
+                              className="text-sm text-foreground/80 leading-relaxed"
+                              initial={{ opacity: 0, y: 10 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: i * 0.1 }}
+                            >
+                              {paragraph}
+                            </motion.p>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </div>
             </motion.div>
           ))}
